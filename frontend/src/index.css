@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
+/* unlike v3, v4 encourages CSS-first configuration so theme settings are now 
+done with the theme directive here  */
 @theme {
+  /* colors */
   --color-smoke: #F2F2F2;
   --color-dark-lime: #7CCE1E;
   --color-cornflower-blue: #6288EE;
@@ -8,11 +11,14 @@
   --color-black-olive: #353D2F;
   --color-brick-red: #E6514D;
   --color-grey: #BEBEBE;
+
+  /* fonts */
+  --font-sans: "Poppins", "Inter";
 }
 
 html, body, #root {
   color: #f2f2f2;
-  background-color: #242424;
+  background-color: #2d3142;
   
   height: 100vh;
   width: 100vw;
