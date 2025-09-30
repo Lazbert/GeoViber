@@ -585,3 +585,126 @@ export const COUNTRIES = [
         "countryCode": "VN"
     },
 ]
+
+export const DEFAULT_SUN_DIRECTION = {
+    x: -2,
+    y: 0.5,
+    z: 1.5
+}
+
+export const EARTH_VERTEX_SHADER = `
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+    uniform sampler2D elevTexture;
+
+    void main() {
+        // Position
+        vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+        gl_Position = projectionMatrix * viewMatrix * modelPosition;
+
+        // Model normal
+        vec3 modelNormal = (modelMatrix * vec4(normal, 0.0)).xyz;
+
+        // Varyings
+        vUv = uv;
+        vNormal = modelNormal;
+        vPosition = modelPosition.xyz;
+    }
+`
+
+export const EARTH_FRAGMENT_SHADER = `
+    uniform sampler2D dayTexture;
+    uniform sampler2D nightTexture;
+    uniform sampler2D cloudsTexture;
+    uniform vec3 sunDirection;
+
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+
+    void main() {
+        vec3 viewDirection = normalize(vPosition - cameraPosition);
+        vec3 normal = normalize(vNormal);
+        vec3 color = vec3(0.0);
+
+        // Sun orientation
+        float sunOrientation = dot(sunDirection, normal);
+
+        // Day / night color
+        float dayMix = smoothstep(- 0.25, 0.5, sunOrientation);
+        vec3 dayColor = texture(dayTexture, vUv).rgb;
+        vec3 nightColor = texture(nightTexture, vUv).rgb;
+        color = mix(nightColor, dayColor, dayMix);
+
+        // Specular cloud color
+        vec2 specularCloudsColor = texture(cloudsTexture, vUv).rg;
+
+        // Clouds
+        float cloudsMix = smoothstep(0.0, 1.0, specularCloudsColor.g);
+        cloudsMix *= dayMix;
+        color = mix(color, vec3(1.0), cloudsMix);
+
+        // Specular
+        vec3 reflection = reflect(- sunDirection, normal);
+        float specular = - dot(reflection, viewDirection);
+        // specular = max(specular, 0.0);
+        // specular = pow(specular, 0.5);
+        // specular *= specularCloudsColor.r;
+        // color += specular * 0.5;
+        
+        // Final color
+        gl_FragColor = vec4(color, 1.0);
+    }
+`
+
+export const FRESNEL_VERTEX_SHADER = `
+    uniform float fresnelBias;
+    uniform float fresnelScale;
+    uniform float fresnelPower;
+
+    varying float vReflectionFactor;
+
+    void main() {
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+
+        vec3 worldNormal = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
+
+        vec3 I = worldPosition.xyz - cameraPosition;
+
+        vReflectionFactor = fresnelBias + fresnelScale * pow( 1.0 + dot( normalize( I ), worldNormal ), fresnelPower );
+
+        gl_Position = projectionMatrix * mvPosition;
+    }
+`
+
+export const FRESNEL_FRAGMENT_SHADER = `
+    uniform vec3 color1;
+    uniform vec3 color2;
+
+    varying float vReflectionFactor;
+
+    void main() {
+    float f = clamp( vReflectionFactor, 0.0, 1.0 );
+    gl_FragColor = vec4(mix(color2, color1, vec3(f)), f);
+    }
+`
+
+
+// Earth mesh tweaks
+export const fresnelRimHex = 0x0088ff;
+export const fresnelFacingHex = 0x000000;
+export const axialTiltInRadian = 23.4 * Math.PI / 180;
+export const earthRadius = 2.55; 
+export const NebulaSpriteMaterialConfigs = {
+    fog: true,
+    hue: 0.66,
+    numSprites: 14,
+    opacity: 0.35,
+    path: "./rad-grad.png",
+    radius: 10.5,
+    saturation: 0.53,
+    size: 26,
+    z: -10.5
+}
