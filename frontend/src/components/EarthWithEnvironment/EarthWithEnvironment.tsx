@@ -83,6 +83,7 @@ const getFresnelShaderArgs = () => {
   return args;
 }
 
+// TODO: [low priority] blow up the Earth when clicked >:D
 const EarthMesh: React.FC = () => {
     const ref = useRef<THREE.Mesh>(null);
     
