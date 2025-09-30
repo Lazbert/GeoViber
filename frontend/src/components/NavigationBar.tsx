@@ -1,12 +1,12 @@
 import IconGeoViber from '@/assets/IconGeoViber.svg?react';
 
-const NavigationBar = () => {
+const NavigationBar: React.FC = () => {
   return (
-    <div className="bg-white/20 rounded-b-2xl p-4 px-6 flex justify-between items-center w-full">
+    <div className="z-10 bg-white/20 rounded-b-2xl p-4 px-6 flex justify-between items-center w-full">
       <div className="flex items-center gap-3">
         <IconGeoViber className="w-[70px] h-[70px]" />
-        <span className="font-inter font-bold text-4xl text-gunmetal leading-[1.21]">
-          GeoViber
+        <span className="font-semibold text-4xl leading-[1.21]">
+          <span className="text-brick-red">Geo</span>Viber
         </span>
       </div>
       <div className="flex gap-5 py-2">
