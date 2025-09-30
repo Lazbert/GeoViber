@@ -708,3 +708,5 @@ export const NebulaSpriteMaterialConfigs = {
     size: 26,
     z: -10.5
 }
+export const numberOfStars = 2000;
+export const twinklingThreshold = 0.5;  // between 0 and 1, higher means fewer twinkling stars
