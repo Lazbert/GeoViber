@@ -13,8 +13,7 @@ const HeroSection: React.FC = () => {
             </span>
         </div>
         <span className="text-2xl text-grey leading-tight text-left">
-            The all-in-one platform to compile all metas into a compendium<br />
-            for Geoguessr enthusiasts
+            The all-in-one platform to collate metas and trivia for Geoguessr enthusiasts
         </span>
         <IconGMapsPin className="absolute top-[-2px] left-[368px] w-[195px] h-[195px]" />
         <AutocompleteCountryBar />
