@@ -3,15 +3,16 @@ import AutocompleteCountryBar from './AutocompleteCountryBar';
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative flex flex-col items-center gap-6 px-5">
-        <span className="font-semibold text-[64px] text-dark-lime leading-tight text-left px-2.5">
-            Skill issues?
-            <br />
-            <span className='text-smoke text-[36px]'>
+    <div className="relative flex flex-col gap-6 px-5">
+        <div>
+            <span className="font-semibold text-[58px] text-dark-lime leading-none text-left whitespace-pre">
+                Skill issues?{"\n"}
+            </span>
+            <span className='-mt-2 text-smoke text-[32px]'>
                 Start guessing like you've been living there
             </span>
-        </span>
-        <span className="text-2xl text-grey leading-tight text-left px-2.5">
+        </div>
+        <span className="text-2xl text-grey leading-tight text-left">
             The all-in-one platform to compile all metas into a compendium<br />
             for Geoguessr enthusiasts
         </span>
