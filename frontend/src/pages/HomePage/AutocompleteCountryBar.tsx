@@ -38,8 +38,8 @@ const AutocompleteCountryBar: React.FC = () => {
   }
 
   return (
-    <div className="relative w-full">
-      <div className="flex items-center w-4/5 bg-smoke border-2 border-brick-red rounded-lg h-fit">
+    <div className="relative w-[700px]">
+      <div className="flex items-center bg-smoke border-2 border-brick-red rounded-lg h-fit">
         <input
           placeholder="Take me to..."
           className="flex-1 px-4 bg-transparent placeholder-gray-400 text-gunmetal text-[16px] outline-none"
@@ -55,7 +55,7 @@ const AutocompleteCountryBar: React.FC = () => {
       
       {/* dropdown menu, items are updated based on input */}
       <ul
-        className={cx("z-10 w-4/5 absolute top-full mt-1 inset-x-0 bg-white border border-grey rounded-lg shadow-lg max-h-50 overflow-auto scrollbar-hide", { hidden: !isOpen })}
+        className={cx("z-10 absolute top-full mt-1 inset-x-0 bg-white border border-grey rounded-lg shadow-lg max-h-50 overflow-auto scrollbar-hide", { hidden: !isOpen })}
         {...getMenuProps()}
       >
         {isOpen &&
