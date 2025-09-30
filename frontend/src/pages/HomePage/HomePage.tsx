@@ -2,7 +2,7 @@ import NavigationBar from "@/components/NavigationBar";
 import HeroSection from "./HeroSection";
 import InteractiveEarth from "./InteractiveEarth";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className="relative flex flex-col w-full h-full bg-gradient-to-b from-black-olive to-gunmental">
         <div className="absolute inset-0 bg-[url('/cosmos-bg.jpg')] bg-cover bg-center opacity-20" />
