@@ -9,26 +9,33 @@ interface SwitchToggleProps {
 
 const SwitchToggle: React.FC<SwitchToggleProps> = ({ enabled, setEnabled, className }) => {
   return (
-    <Field className={cx("text-[20px] flex items-center gap-3", className)}>
-        <Label>Enable 3D</Label>
+    <Field className={cx("text-base sm:text-lg flex items-center gap-3 select-none", className)}>
+        <Label
+          className={cx(
+            "font-medium transition-colors duration-200",
+            enabled ? "text-dark-lime" : "text-smoke/70"
+          )}
+        >
+          Enable 3D
+        </Label>
         <Switch
             checked={enabled}
             onChange={setEnabled}
             className={cx(
-                "relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75",
+                "group relative inline-flex h-8 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-dark-lime/70",
                 {
-                    "bg-dark-lime": enabled,
-                    "bg-slate-500": !enabled
+                    "bg-dark-lime animate-glow-pulse": enabled,
+                    "bg-smoke/20": !enabled
                 }
             )}
         >
-            <span className="sr-only">Use setting</span>
+            <span className="sr-only">Enable 3D Earth view</span>
             <span
                 aria-hidden="true"
                 className={cx(
-                "pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out",
+                "pointer-events-none inline-block h-7 w-7 transform rounded-full bg-smoke shadow-lg ring-0 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
                 {
-                    "translate-x-9": enabled,
+                    "translate-x-6": enabled,
                     "translate-x-0": !enabled
                 },
                 )}
