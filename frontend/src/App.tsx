@@ -1,12 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
+import CountriesPage from './pages/CountriesPage'
+import CountryDetailPage from './pages/CountryDetailPage'
 
 function App() {
-
-  // TODO: React Router here, with Layout component
   return (
-    <>
-      <HomePage />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/countries" element={<CountriesPage />} />
+          <Route path="/countries/:slug" element={<CountryDetailPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
